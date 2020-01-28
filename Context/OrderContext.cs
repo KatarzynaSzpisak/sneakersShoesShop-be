@@ -78,7 +78,10 @@ namespace onlineTShirtShop.OrderContexts
                 Price = 100,
                 ActualCost = 100,
                 ImageUrl = "/images/test1.jpg",
-                Details = "Unic cats tshirt, hand made design"
+                Details = "Unic cats tshirt, hand made design",
+                ColorId = 1,
+                SizeId = 1,
+                MaterialId = 1
             });
             modelBuilder.Entity<Product>().HasData(new Product
             {
@@ -87,7 +90,10 @@ namespace onlineTShirtShop.OrderContexts
                 Price = 90,
                 ActualCost = 90,
                 ImageUrl = "/images/test2.jpeg",
-                Details = "Unic classic tshirt, hand made design"
+                Details = "Unic classic tshirt, hand made design",
+                ColorId = 2,
+                SizeId = 2,
+                MaterialId = 2
             });
             modelBuilder.Entity<Product>().HasData(new Product
             {
@@ -96,7 +102,10 @@ namespace onlineTShirtShop.OrderContexts
                 Price = 80,
                 ActualCost = 80,
                 ImageUrl = "/images/test3.jpeg",
-                Details = "Unic unisex tshirt, hand made design"
+                Details = "Unic unisex tshirt, hand made design",
+                ColorId = 3,
+                SizeId = 3,
+                MaterialId = 1
             });
             //color
             modelBuilder.Entity<Color>().HasData(new Color
@@ -176,12 +185,22 @@ namespace onlineTShirtShop.OrderContexts
             modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail
             {
                 Id = 2,
-                Quantity = 10,
+                Quantity = 70,
                 OrderId = 3,
                 ProductId = 1,
                 ColorId = 1,
                 SizeId = 1,
                 MaterialId = 1
+            });
+            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail
+            {
+                Id = 3,
+                Quantity = 5,
+                OrderId = 2,
+                ProductId = 3,
+                ColorId = 3,
+                SizeId = 3,
+                MaterialId = 2
             });
         }
     }

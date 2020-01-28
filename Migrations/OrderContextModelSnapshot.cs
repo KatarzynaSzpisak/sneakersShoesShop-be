@@ -85,7 +85,7 @@ namespace onlineTShirtShop.Migrations
                             Email = "tanya.l@l.se",
                             FirstName = "Tanya",
                             LastName = "L",
-                            Registered = new DateTime(2019, 12, 4, 14, 44, 50, 13, DateTimeKind.Local).AddTicks(6670),
+                            Registered = new DateTime(2019, 12, 9, 12, 20, 28, 321, DateTimeKind.Local).AddTicks(7940),
                             Telephone = 123456789
                         },
                         new
@@ -94,7 +94,7 @@ namespace onlineTShirtShop.Migrations
                             Email = "dima.l@l.se",
                             FirstName = "Dima",
                             LastName = "L",
-                            Registered = new DateTime(2020, 1, 13, 14, 44, 50, 24, DateTimeKind.Local).AddTicks(5300),
+                            Registered = new DateTime(2020, 1, 18, 12, 20, 28, 329, DateTimeKind.Local).AddTicks(3550),
                             Telephone = 123456789
                         },
                         new
@@ -103,7 +103,7 @@ namespace onlineTShirtShop.Migrations
                             Email = "kolya.l@l.com",
                             FirstName = "Kolya",
                             LastName = "L",
-                            Registered = new DateTime(2020, 1, 18, 14, 44, 50, 24, DateTimeKind.Local).AddTicks(5450),
+                            Registered = new DateTime(2020, 1, 23, 12, 20, 28, 329, DateTimeKind.Local).AddTicks(3690),
                             Telephone = 123456789
                         });
                 });
@@ -160,21 +160,21 @@ namespace onlineTShirtShop.Migrations
                         new
                         {
                             Id = 1,
-                            Created = new DateTime(2020, 1, 23, 14, 44, 50, 24, DateTimeKind.Local).AddTicks(8090),
+                            Created = new DateTime(2020, 1, 28, 12, 20, 28, 329, DateTimeKind.Local).AddTicks(6250),
                             CustomerId = 1,
                             Status = "payd"
                         },
                         new
                         {
                             Id = 2,
-                            Created = new DateTime(2020, 1, 23, 11, 44, 50, 24, DateTimeKind.Local).AddTicks(8850),
+                            Created = new DateTime(2020, 1, 28, 9, 20, 28, 329, DateTimeKind.Local).AddTicks(7000),
                             CustomerId = 2,
                             Status = "onpayd"
                         },
                         new
                         {
                             Id = 3,
-                            Created = new DateTime(2020, 1, 21, 14, 44, 50, 24, DateTimeKind.Local).AddTicks(8930),
+                            Created = new DateTime(2020, 1, 26, 12, 20, 28, 329, DateTimeKind.Local).AddTicks(7080),
                             CustomerId = 3,
                             Status = "basket"
                         });
@@ -236,8 +236,18 @@ namespace onlineTShirtShop.Migrations
                             MaterialId = 1,
                             OrderId = 3,
                             ProductId = 1,
-                            Quantity = 10,
+                            Quantity = 70,
                             SizeId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ColorId = 3,
+                            MaterialId = 2,
+                            OrderId = 2,
+                            ProductId = 3,
+                            Quantity = 5,
+                            SizeId = 3
                         });
                 });
 
@@ -250,11 +260,17 @@ namespace onlineTShirtShop.Migrations
                     b.Property<decimal>("ActualCost")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("ColorId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Details")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("MaterialId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -263,7 +279,16 @@ namespace onlineTShirtShop.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("SizeId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ColorId");
+
+                    b.HasIndex("MaterialId");
+
+                    b.HasIndex("SizeId");
 
                     b.ToTable("Products");
 
@@ -272,28 +297,37 @@ namespace onlineTShirtShop.Migrations
                         {
                             Id = 1,
                             ActualCost = 100m,
+                            ColorId = 1,
                             Details = "Unic cats tshirt, hand made design",
                             ImageUrl = "/images/test1.jpg",
+                            MaterialId = 1,
                             Name = "Cats TShirt",
-                            Price = 100m
+                            Price = 100m,
+                            SizeId = 1
                         },
                         new
                         {
                             Id = 2,
                             ActualCost = 90m,
+                            ColorId = 2,
                             Details = "Unic classic tshirt, hand made design",
                             ImageUrl = "/images/test2.jpeg",
+                            MaterialId = 2,
                             Name = "Classic TShirt",
-                            Price = 90m
+                            Price = 90m,
+                            SizeId = 2
                         },
                         new
                         {
                             Id = 3,
                             ActualCost = 80m,
+                            ColorId = 3,
                             Details = "Unic unisex tshirt, hand made design",
                             ImageUrl = "/images/test3.jpeg",
+                            MaterialId = 1,
                             Name = "Unisex TShirt",
-                            Price = 80m
+                            Price = 80m,
+                            SizeId = 3
                         });
                 });
 
@@ -376,6 +410,27 @@ namespace onlineTShirtShop.Migrations
                     b.HasOne("onlineTShirtShop.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("onlineTShirtShop.Models.Size", "Size")
+                        .WithMany()
+                        .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("onlineTShirtShop.Models.Product", b =>
+                {
+                    b.HasOne("onlineTShirtShop.Models.Color", "Color")
+                        .WithMany()
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("onlineTShirtShop.Models.Material", "Material")
+                        .WithMany()
+                        .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

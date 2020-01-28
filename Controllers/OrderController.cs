@@ -26,11 +26,16 @@ namespace onlineTShirtShop.Controllers
         {
             using (OrderContext context = new OrderContext())
             {
-                // return context.Orders
-                // .ToList();
                 return context.Orders
                         .Include(o => o.OrderDetails)
                             .ThenInclude(od => od.Size)
+
+                        .Include(o => o.OrderDetails)
+                            .ThenInclude(od => od.Color)
+
+                        .Include(o => o.OrderDetails)
+                            .ThenInclude(od => od.Material)
+                            
                         .ToArray();
             }
         }
@@ -44,6 +49,13 @@ namespace onlineTShirtShop.Controllers
                 return Ok(context.Orders
                         .Include(o => o.OrderDetails)
                             .ThenInclude(od => od.Size)
+
+                        .Include(o => o.OrderDetails)
+                            .ThenInclude(od => od.Color)
+
+                        .Include(o => o.OrderDetails)
+                            .ThenInclude(od => od.Material)
+                            
                         .First(o => o.Id == id));
             }
         }

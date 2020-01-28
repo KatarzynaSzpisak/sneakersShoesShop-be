@@ -17,7 +17,14 @@ namespace onlineTShirtShop.Models
         public string ImageUrl { get; set; }
         public string Details { get; set; }
 
+        public int ColorId { get; set; }
+        public int SizeId { get; set; }
+        public int MaterialId { get; set; }
 
+        public Size Size { get; set; }
+        public Material Material { get; set; }
+        public Color Color { get; set; }
+        
     }
 }
 
