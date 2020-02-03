@@ -24,7 +24,7 @@ namespace onlineTShirtShop.Models
         public Size Size { get; set; }
         public Material Material { get; set; }
         public Color Color { get; set; }
-        
+        // public object Products { get; internal set; }
     }
 }
 

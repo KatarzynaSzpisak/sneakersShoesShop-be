@@ -14,6 +14,7 @@ namespace onlineTShirtShop.OrderContexts
         public DbSet<Color> Colors { get; set; } // Table Colors
         public DbSet<Size> Sizes { get; set; } // Table Sizes
         public DbSet<Material> Materials { get; set; } // Table Materials
+        public object Product { get; internal set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
          => options.UseSqlite("Data Source=onlineshop.db");
@@ -81,7 +82,7 @@ namespace onlineTShirtShop.OrderContexts
                 Details = "Unic cats tshirt, hand made design",
                 ColorId = 1,
                 SizeId = 1,
-                MaterialId = 1
+                MaterialId = 1,
             });
             modelBuilder.Entity<Product>().HasData(new Product
             {

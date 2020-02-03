@@ -26,11 +26,10 @@ namespace onlineTShirtShop.Controllers
         {
             using (OrderContext context = new OrderContext())
             {
-                return context.Products
-                .ToList();
+                return context.Products.ToList();
             }
         }
-    
+
 
         // GET product/2
         [HttpGet("{id}")]
@@ -38,7 +37,11 @@ namespace onlineTShirtShop.Controllers
         {
             using (OrderContext context = new OrderContext())
             {
-                return Ok(context.Products.First(o => o.Id == id));
+                return Ok(context.Products
+                        .Include(p => p.Size)
+                        .Include(p => p.Color)
+                        .Include(p => p.Material)
+                        .First(everyProduct => everyProduct.Id == id));
             }
         }
     }
