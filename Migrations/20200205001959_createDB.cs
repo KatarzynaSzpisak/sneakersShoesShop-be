@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace onlineTShirtShop.Migrations
 {
-    public partial class CreateDB : Migration
+    public partial class createDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -170,6 +170,55 @@ namespace onlineTShirtShop.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "OrderRows",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    OrderId = table.Column<int>(nullable: false),
+                    CustomerId = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    ProductId = table.Column<int>(nullable: false),
+                    ColorId = table.Column<int>(nullable: false),
+                    SizeId = table.Column<int>(nullable: false),
+                    MaterialId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderRows", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderRows_Colors_ColorId",
+                        column: x => x.ColorId,
+                        principalTable: "Colors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderRows_Materials_MaterialId",
+                        column: x => x.MaterialId,
+                        principalTable: "Materials",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderRows_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderRows_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderRows_Sizes_SizeId",
+                        column: x => x.SizeId,
+                        principalTable: "Sizes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Colors",
                 columns: new[] { "Id", "ColorName" },
@@ -193,17 +242,17 @@ namespace onlineTShirtShop.Migrations
             migrationBuilder.InsertData(
                 table: "Customers",
                 columns: new[] { "Id", "Email", "FirstName", "LastName", "Registered", "Telephone" },
-                values: new object[] { 1, "tanya.l@l.se", "Tanya", "L", new DateTime(2019, 12, 9, 11, 4, 4, 77, DateTimeKind.Local).AddTicks(2290), 123456789 });
+                values: new object[] { 1, "tanya.l@l.se", "Tanya", "L", new DateTime(2019, 12, 17, 1, 19, 58, 786, DateTimeKind.Local).AddTicks(2710), 123456789 });
 
             migrationBuilder.InsertData(
                 table: "Customers",
                 columns: new[] { "Id", "Email", "FirstName", "LastName", "Registered", "Telephone" },
-                values: new object[] { 2, "dima.l@l.se", "Dima", "L", new DateTime(2020, 1, 18, 11, 4, 4, 84, DateTimeKind.Local).AddTicks(9830), 123456789 });
+                values: new object[] { 2, "dima.l@l.se", "Dima", "L", new DateTime(2020, 1, 26, 1, 19, 58, 794, DateTimeKind.Local).AddTicks(3990), 123456789 });
 
             migrationBuilder.InsertData(
                 table: "Customers",
                 columns: new[] { "Id", "Email", "FirstName", "LastName", "Registered", "Telephone" },
-                values: new object[] { 3, "kolya.l@l.com", "Kolya", "L", new DateTime(2020, 1, 23, 11, 4, 4, 84, DateTimeKind.Local).AddTicks(9980), 123456789 });
+                values: new object[] { 3, "kolya.l@l.com", "Kolya", "L", new DateTime(2020, 1, 31, 1, 19, 58, 794, DateTimeKind.Local).AddTicks(4160), 123456789 });
 
             migrationBuilder.InsertData(
                 table: "Materials",
@@ -248,47 +297,32 @@ namespace onlineTShirtShop.Migrations
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "Created", "CustomerId", "Status" },
-                values: new object[] { 1, new DateTime(2020, 1, 28, 11, 4, 4, 85, DateTimeKind.Local).AddTicks(2610), 1, "payd" });
+                values: new object[] { 1, new DateTime(2020, 2, 5, 1, 19, 58, 794, DateTimeKind.Local).AddTicks(7050), 1, "BASKET" });
 
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "Created", "CustomerId", "Status" },
-                values: new object[] { 2, new DateTime(2020, 1, 28, 8, 4, 4, 85, DateTimeKind.Local).AddTicks(3390), 2, "onpayd" });
+                values: new object[] { 2, new DateTime(2020, 2, 4, 22, 19, 58, 794, DateTimeKind.Local).AddTicks(7980), 2, "onpaid" });
 
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "Created", "CustomerId", "Status" },
-                values: new object[] { 3, new DateTime(2020, 1, 26, 11, 4, 4, 85, DateTimeKind.Local).AddTicks(3470), 3, "basket" });
+                values: new object[] { 3, new DateTime(2020, 2, 3, 1, 19, 58, 794, DateTimeKind.Local).AddTicks(8090), 3, "basket" });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "ActualCost", "ColorId", "Details", "ImageUrl", "MaterialId", "Name", "Price", "SizeId" },
-                values: new object[] { 1, 100m, 1, "Unic cats tshirt, hand made design", "/images/test1.jpg", 1, "Cats TShirt", 100m, 1 });
+                values: new object[] { 1, 100m, 1, "Unik cats tshirt, hand made design", "/images/test1.jpg", 1, "Cats TShirt", 100m, 1 });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "ActualCost", "ColorId", "Details", "ImageUrl", "MaterialId", "Name", "Price", "SizeId" },
-                values: new object[] { 2, 90m, 2, "Unic classic tshirt, hand made design", "/images/test2.jpeg", 2, "Classic TShirt", 90m, 2 });
+                values: new object[] { 2, 90m, 2, "Unik classic tshirt, hand made design", "/images/test2.jpg", 2, "Classic TShirt", 90m, 2 });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "ActualCost", "ColorId", "Details", "ImageUrl", "MaterialId", "Name", "Price", "SizeId" },
-                values: new object[] { 3, 80m, 3, "Unic unisex tshirt, hand made design", "/images/test3.jpeg", 1, "Unisex TShirt", 80m, 3 });
-
-            migrationBuilder.InsertData(
-                table: "OrderDetails",
-                columns: new[] { "Id", "ColorId", "MaterialId", "OrderId", "ProductId", "Quantity", "SizeId" },
-                values: new object[] { 1, 1, 2, 3, 1, 10, 1 });
-
-            migrationBuilder.InsertData(
-                table: "OrderDetails",
-                columns: new[] { "Id", "ColorId", "MaterialId", "OrderId", "ProductId", "Quantity", "SizeId" },
-                values: new object[] { 2, 1, 1, 3, 1, 70, 1 });
-
-            migrationBuilder.InsertData(
-                table: "OrderDetails",
-                columns: new[] { "Id", "ColorId", "MaterialId", "OrderId", "ProductId", "Quantity", "SizeId" },
-                values: new object[] { 3, 3, 2, 2, 3, 5, 3 });
+                values: new object[] { 3, 80m, 3, "Unik unisex tshirt, hand made design", "/images/test3.jpg", 1, "Unisex TShirt", 80m, 3 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_ColorId",
@@ -316,6 +350,31 @@ namespace onlineTShirtShop.Migrations
                 column: "SizeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderRows_ColorId",
+                table: "OrderRows",
+                column: "ColorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderRows_MaterialId",
+                table: "OrderRows",
+                column: "MaterialId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderRows_OrderId",
+                table: "OrderRows",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderRows_ProductId",
+                table: "OrderRows",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderRows_SizeId",
+                table: "OrderRows",
+                column: "SizeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerId",
                 table: "Orders",
                 column: "CustomerId");
@@ -340,6 +399,9 @@ namespace onlineTShirtShop.Migrations
         {
             migrationBuilder.DropTable(
                 name: "OrderDetails");
+
+            migrationBuilder.DropTable(
+                name: "OrderRows");
 
             migrationBuilder.DropTable(
                 name: "Orders");

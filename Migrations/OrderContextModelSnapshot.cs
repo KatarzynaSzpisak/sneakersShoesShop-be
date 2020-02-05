@@ -85,7 +85,7 @@ namespace onlineTShirtShop.Migrations
                             Email = "tanya.l@l.se",
                             FirstName = "Tanya",
                             LastName = "L",
-                            Registered = new DateTime(2019, 12, 17, 1, 15, 53, 945, DateTimeKind.Local).AddTicks(880),
+                            Registered = new DateTime(2019, 12, 17, 1, 19, 58, 786, DateTimeKind.Local).AddTicks(2710),
                             Telephone = 123456789
                         },
                         new
@@ -94,7 +94,7 @@ namespace onlineTShirtShop.Migrations
                             Email = "dima.l@l.se",
                             FirstName = "Dima",
                             LastName = "L",
-                            Registered = new DateTime(2020, 1, 26, 1, 15, 53, 952, DateTimeKind.Local).AddTicks(8950),
+                            Registered = new DateTime(2020, 1, 26, 1, 19, 58, 794, DateTimeKind.Local).AddTicks(3990),
                             Telephone = 123456789
                         },
                         new
@@ -103,7 +103,7 @@ namespace onlineTShirtShop.Migrations
                             Email = "kolya.l@l.com",
                             FirstName = "Kolya",
                             LastName = "L",
-                            Registered = new DateTime(2020, 1, 31, 1, 15, 53, 952, DateTimeKind.Local).AddTicks(9090),
+                            Registered = new DateTime(2020, 1, 31, 1, 19, 58, 794, DateTimeKind.Local).AddTicks(4160),
                             Telephone = 123456789
                         });
                 });
@@ -160,21 +160,21 @@ namespace onlineTShirtShop.Migrations
                         new
                         {
                             Id = 1,
-                            Created = new DateTime(2020, 2, 5, 1, 15, 53, 953, DateTimeKind.Local).AddTicks(1850),
+                            Created = new DateTime(2020, 2, 5, 1, 19, 58, 794, DateTimeKind.Local).AddTicks(7050),
                             CustomerId = 1,
                             Status = "BASKET"
                         },
                         new
                         {
                             Id = 2,
-                            Created = new DateTime(2020, 2, 4, 22, 15, 53, 953, DateTimeKind.Local).AddTicks(2620),
+                            Created = new DateTime(2020, 2, 4, 22, 19, 58, 794, DateTimeKind.Local).AddTicks(7980),
                             CustomerId = 2,
                             Status = "onpaid"
                         },
                         new
                         {
                             Id = 3,
-                            Created = new DateTime(2020, 2, 3, 1, 15, 53, 953, DateTimeKind.Local).AddTicks(2700),
+                            Created = new DateTime(2020, 2, 3, 1, 19, 58, 794, DateTimeKind.Local).AddTicks(8090),
                             CustomerId = 3,
                             Status = "basket"
                         });
