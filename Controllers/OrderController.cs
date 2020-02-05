@@ -59,6 +59,5 @@ namespace onlineTShirtShop.Controllers
                         .First(o => o.Id == id));
             }
         }
-
     }
 }

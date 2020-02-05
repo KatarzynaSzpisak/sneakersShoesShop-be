@@ -11,6 +11,8 @@ namespace onlineTShirtShop.OrderContexts
         public DbSet<Product> Products { get; set; } // Tabel Products
         public DbSet<Order> Orders { get; set; } //Table Orders
         public DbSet<OrderDetail> OrderDetails { get; set; } // Table OrderDetails
+        public DbSet<OrderRow> OrderRows { get; set; } //Table OrderRows
+
         public DbSet<Color> Colors { get; set; } // Table Colors
         public DbSet<Size> Sizes { get; set; } // Table Sizes
         public DbSet<Material> Materials { get; set; } // Table Materials
@@ -49,28 +51,34 @@ namespace onlineTShirtShop.OrderContexts
                 Telephone = 123456789,
                 Registered = DateTime.Now.AddDays(-5)
             });
-            //order
+            //order basket
             modelBuilder.Entity<Order>().HasData(new Order
             {
                 Id = 1,
                 CustomerId = 1,
-                Status = "payd",
-                Created = DateTime.Now
+                Status = "BASKET",
+                Created = DateTime.Now,
             });
             modelBuilder.Entity<Order>().HasData(new Order
             {
                 Id = 2,
                 CustomerId = 2,
-                Status = "onpayd",
-                Created = DateTime.Now.AddHours(-3)
+                Status = "onpaid",
+                Created = DateTime.Now.AddHours(-3),
+
             });
             modelBuilder.Entity<Order>().HasData(new Order
             {
                 Id = 3,
                 CustomerId = 3,
                 Status = "basket",
-                Created = DateTime.Now.AddDays(-2)
+                Created = DateTime.Now.AddDays(-2),
             });
+            // orderRow
+            modelBuilder.Entity<OrderRow>()
+                .Property(o => o.Id)
+                .ValueGeneratedOnAdd();
+
             //product
             modelBuilder.Entity<Product>().HasData(new Product
             {
@@ -79,7 +87,7 @@ namespace onlineTShirtShop.OrderContexts
                 Price = 100,
                 ActualCost = 100,
                 ImageUrl = "/images/test1.jpg",
-                Details = "Unic cats tshirt, hand made design",
+                Details = "Unik cats tshirt, hand made design",
                 ColorId = 1,
                 SizeId = 1,
                 MaterialId = 1,
@@ -90,8 +98,8 @@ namespace onlineTShirtShop.OrderContexts
                 Name = "Classic TShirt",
                 Price = 90,
                 ActualCost = 90,
-                ImageUrl = "/images/test2.jpeg",
-                Details = "Unic classic tshirt, hand made design",
+                ImageUrl = "/images/test2.jpg",
+                Details = "Unik classic tshirt, hand made design",
                 ColorId = 2,
                 SizeId = 2,
                 MaterialId = 2
@@ -102,8 +110,8 @@ namespace onlineTShirtShop.OrderContexts
                 Name = "Unisex TShirt",
                 Price = 80,
                 ActualCost = 80,
-                ImageUrl = "/images/test3.jpeg",
-                Details = "Unic unisex tshirt, hand made design",
+                ImageUrl = "/images/test3.jpg",
+                Details = "Unik unisex tshirt, hand made design",
                 ColorId = 3,
                 SizeId = 3,
                 MaterialId = 1
@@ -172,37 +180,37 @@ namespace onlineTShirtShop.OrderContexts
                 MaterialName = "leather"
             });
             // order detail
-            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail
-            {
-                Id = 1,
-                Quantity = 10,
-                OrderId = 3,
-                ProductId = 1,
-                ColorId = 1,
-                SizeId = 1,
-                MaterialId = 2
-            });
+            // modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail
+            // {
+            //     Id = 1,
+            //     Quantity = 10,
+            //     OrderId = 3,
+            //     ProductId = 1,
+            //     ColorId = 1,
+            //     SizeId = 1,
+            //     MaterialId = 2
+            // });
 
-            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail
-            {
-                Id = 2,
-                Quantity = 70,
-                OrderId = 3,
-                ProductId = 1,
-                ColorId = 1,
-                SizeId = 1,
-                MaterialId = 1
-            });
-            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail
-            {
-                Id = 3,
-                Quantity = 5,
-                OrderId = 2,
-                ProductId = 3,
-                ColorId = 3,
-                SizeId = 3,
-                MaterialId = 2
-            });
+            // modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail
+            // {
+            //     Id = 2,
+            //     Quantity = 70,
+            //     OrderId = 3,
+            //     ProductId = 1,
+            //     ColorId = 1,
+            //     SizeId = 1,
+            //     MaterialId = 1
+            // });
+            // modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail
+            // {
+            //     Id = 3,
+            //     Quantity = 5,
+            //     OrderId = 2,
+            //     ProductId = 3,
+            //     ColorId = 3,
+            //     SizeId = 3,
+            //     MaterialId = 2
+            // });
         }
     }
 }

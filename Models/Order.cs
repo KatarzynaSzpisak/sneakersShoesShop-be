@@ -20,6 +20,9 @@ namespace onlineTShirtShop.Models
         public ICollection<OrderDetail> OrderDetails {get; set;}
         public Customer Customer {get; set;}
 
+        //Navigation property
+        public List<OrderRow> OrderRows { get; set; }
+
         internal void Remove(object toRemove)
         {
             throw new NotImplementedException();

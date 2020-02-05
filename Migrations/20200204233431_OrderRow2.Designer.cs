@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using onlineTShirtShop.OrderContexts;
 
 namespace onlineTShirtShop.Migrations
 {
     [DbContext(typeof(OrderContext))]
-    partial class OrderContextModelSnapshot : ModelSnapshot
+    [Migration("20200204233431_OrderRow2")]
+    partial class OrderRow2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,7 +87,7 @@ namespace onlineTShirtShop.Migrations
                             Email = "tanya.l@l.se",
                             FirstName = "Tanya",
                             LastName = "L",
-                            Registered = new DateTime(2019, 12, 17, 1, 15, 53, 945, DateTimeKind.Local).AddTicks(880),
+                            Registered = new DateTime(2019, 12, 17, 0, 34, 31, 279, DateTimeKind.Local).AddTicks(6350),
                             Telephone = 123456789
                         },
                         new
@@ -94,7 +96,7 @@ namespace onlineTShirtShop.Migrations
                             Email = "dima.l@l.se",
                             FirstName = "Dima",
                             LastName = "L",
-                            Registered = new DateTime(2020, 1, 26, 1, 15, 53, 952, DateTimeKind.Local).AddTicks(8950),
+                            Registered = new DateTime(2020, 1, 26, 0, 34, 31, 287, DateTimeKind.Local).AddTicks(3180),
                             Telephone = 123456789
                         },
                         new
@@ -103,7 +105,7 @@ namespace onlineTShirtShop.Migrations
                             Email = "kolya.l@l.com",
                             FirstName = "Kolya",
                             LastName = "L",
-                            Registered = new DateTime(2020, 1, 31, 1, 15, 53, 952, DateTimeKind.Local).AddTicks(9090),
+                            Registered = new DateTime(2020, 1, 31, 0, 34, 31, 287, DateTimeKind.Local).AddTicks(3420),
                             Telephone = 123456789
                         });
                 });
@@ -160,21 +162,21 @@ namespace onlineTShirtShop.Migrations
                         new
                         {
                             Id = 1,
-                            Created = new DateTime(2020, 2, 5, 1, 15, 53, 953, DateTimeKind.Local).AddTicks(1850),
+                            Created = new DateTime(2020, 2, 5, 0, 34, 31, 287, DateTimeKind.Local).AddTicks(6090),
                             CustomerId = 1,
-                            Status = "BASKET"
+                            Status = "paid"
                         },
                         new
                         {
                             Id = 2,
-                            Created = new DateTime(2020, 2, 4, 22, 15, 53, 953, DateTimeKind.Local).AddTicks(2620),
+                            Created = new DateTime(2020, 2, 4, 21, 34, 31, 287, DateTimeKind.Local).AddTicks(6860),
                             CustomerId = 2,
                             Status = "onpaid"
                         },
                         new
                         {
                             Id = 3,
-                            Created = new DateTime(2020, 2, 3, 1, 15, 53, 953, DateTimeKind.Local).AddTicks(2700),
+                            Created = new DateTime(2020, 2, 3, 0, 34, 31, 287, DateTimeKind.Local).AddTicks(6940),
                             CustomerId = 3,
                             Status = "basket"
                         });
@@ -217,6 +219,38 @@ namespace onlineTShirtShop.Migrations
                     b.HasIndex("SizeId");
 
                     b.ToTable("OrderDetails");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ColorId = 1,
+                            MaterialId = 2,
+                            OrderId = 3,
+                            ProductId = 1,
+                            Quantity = 10,
+                            SizeId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ColorId = 1,
+                            MaterialId = 1,
+                            OrderId = 3,
+                            ProductId = 1,
+                            Quantity = 70,
+                            SizeId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ColorId = 3,
+                            MaterialId = 2,
+                            OrderId = 2,
+                            ProductId = 3,
+                            Quantity = 5,
+                            SizeId = 3
+                        });
                 });
 
             modelBuilder.Entity("onlineTShirtShop.Models.OrderRow", b =>
@@ -225,38 +259,15 @@ namespace onlineTShirtShop.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ColorId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("CustomerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MaterialId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("SizeId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ColorId");
-
-                    b.HasIndex("MaterialId");
-
                     b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("SizeId");
 
                     b.ToTable("OrderRows");
                 });
@@ -432,33 +443,9 @@ namespace onlineTShirtShop.Migrations
 
             modelBuilder.Entity("onlineTShirtShop.Models.OrderRow", b =>
                 {
-                    b.HasOne("onlineTShirtShop.Models.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("onlineTShirtShop.Models.Material", "Material")
-                        .WithMany()
-                        .HasForeignKey("MaterialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("onlineTShirtShop.Models.Order", "Order")
+                    b.HasOne("onlineTShirtShop.Models.Order", null)
                         .WithMany("OrderRows")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("onlineTShirtShop.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("onlineTShirtShop.Models.Size", "Size")
-                        .WithMany()
-                        .HasForeignKey("SizeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
