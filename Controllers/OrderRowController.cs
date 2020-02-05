@@ -28,19 +28,32 @@ namespace onlineTShirtShop.Controllers
         {
             using (OrderContext context = new OrderContext())
             {
-                return context.OrderRows.ToList();
+                return context.OrderRows
+                .Include(or => or.Product)
+                .Include(or => or.Size)
+                .Include(or => or.Color)
+                .Include(or => or.Material)
+                .ToList();
             }
         }
 
         // POST add Row
-        [HttpPost("{id}")]
-        public ActionResult OrderRow (int ProductId)
+        [HttpPost("{ProductId}")]
+        public ActionResult OrderRow(int ProductId)
         {
             using (OrderContext context = new OrderContext())
             {
-                var newOrderRow = new OrderRow{
+                var product = context.Products
+                    .First(everyProduct => everyProduct.Id == ProductId);
+                var newOrderRow = new OrderRow
+                {
                     OrderId = 1,
-                    CustomerId = 1
+                    CustomerId = 1,
+                    Quantity = 1,
+                    ProductId = ProductId,
+                    ColorId = product.ColorId,
+                    SizeId = product.SizeId,
+                    MaterialId = product.MaterialId
                 };
                 context.OrderRows.Add(newOrderRow);
                 context.SaveChanges();
@@ -49,33 +62,20 @@ namespace onlineTShirtShop.Controllers
             }
         }
 
-        // // PUT admin/id         
-        // [HttpPut("{id}")]
-        // public ActionResult<OrderRow> Put(int id, [FromBody] Order updatedOrder)
-        // {
-        //     using (OrderContext context = new OrderContext())
-        //     {
-        //         Order o = context.Orders.First(o => o.Id == id);
-        //         o.Status = updatedOrder.Status;
-        //         context.SaveChanges();
+        // DELETE row in order
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            using (OrderContext context = new OrderContext())
+            {
+                OrderRow or = context.OrderRows
+                .First(or => or.Id == id);
+                context.Remove(or);
+                context.SaveChanges();
 
-        //         return Ok();
-        //     }
-        // }
-
-        // // DELETE row in order
-        // [HttpDelete("{id}")]
-        // public ActionResult Delete(int id)
-        // {
-        //     using (OrderContext context = new OrderContext())
-        //     {
-        //         Order o = context.Orders.newOrderRow.First(o => o.Id == id);
-        //         context.Remove(o);
-        //         context.SaveChanges();
-
-        //         return NoContent();
-        //     }
-        // }
+                return NoContent();
+            }
+        }
 
     }
 }
