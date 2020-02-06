@@ -62,21 +62,21 @@ namespace onlineTShirtShop.Controllers
 
         // POST new Order
         [HttpPost]
-        public ActionResult Order()
+        public ActionResult Order([FromBody] List<Product> cart)
         {
             const int Customer = 1;
 
             using (OrderContext context = new OrderContext())
             {
-                var res = context.OrderRows
-                .Where(or => or.CustomerId == Customer && or.OrderId == 1)
-                .ToList();
+                // var res = context.OrderRows
+                // .Where(or => or.CustomerId == Customer && or.OrderId == 1)
+                // .ToList();
 
-                // check cart is not empty
-                if (res.Count == 0)
-                {
-                    return Ok();
-                }
+                // // check cart is not empty
+                // if (res.Count == 0)
+                // {
+                //     return Ok();
+                // }
 
                 var newOrder = new Order()
                 {
@@ -87,10 +87,17 @@ namespace onlineTShirtShop.Controllers
                 context.Orders.Add(newOrder);
                 context.SaveChanges();
 
-
-                foreach (var or in res)
+                foreach (var product in cart)
                 {
-                    or.OrderId = newOrder.Id;
+                    OrderRow newOrd = new OrderRow();
+                    newOrd.OrderId = newOrder.Id;
+                    newOrd.ProductId = product.Id;
+                    newOrd.SizeId = product.SizeId;
+                    newOrd.ColorId = product.ColorId;
+                    newOrd.MaterialId = product.MaterialId;
+
+                    context.OrderRows.Add(newOrd);
+                    //or.OrderId = newOrder.Id;
                 }
                 context.SaveChanges();
 
