@@ -52,6 +52,10 @@ namespace onlineTShirtShop.OrderContexts
                 Registered = DateTime.Now.AddDays(-5)
             });
             //order basket
+            modelBuilder.Entity<Order>()
+                .Property(o => o.Id)
+                .ValueGeneratedOnAdd();  
+
             modelBuilder.Entity<Order>().HasData(new Order
             {
                 Id = 1,

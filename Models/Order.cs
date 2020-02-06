@@ -17,7 +17,7 @@ namespace onlineTShirtShop.Models
         
         //Navigation property
         //[JsonIgnore]
-        public ICollection<OrderDetail> OrderDetails {get; set;}
+        // public ICollection<OrderDetail> OrderDetails {get; set;}
         public Customer Customer {get; set;}
 
         //Navigation property

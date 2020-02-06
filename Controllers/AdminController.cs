@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using onlineTShirtShop.Models;
 using onlineTShirtShop.OrderContexts;
 
@@ -15,14 +16,27 @@ namespace onlineTShirtShop.Controllers
 
         // GET admin/ListOrder
         [HttpGet]
-        public ActionResult<Order> Get()
+        public IEnumerable<Order> Get()
         {
             using (OrderContext context = new OrderContext())
             {
-                return Ok(context.Orders.ToList());
+                return context.Orders
+                        .Include(o => o.OrderRows)
+                            .ThenInclude(od => od.Size)
+
+                        .Include(o => o.OrderRows)
+                            .ThenInclude(od => od.Color)
+
+                        .Include(o => o.OrderRows)
+                            .ThenInclude(od => od.Material)
+                        .Include(o => o.OrderRows)
+                            .ThenInclude(od => od.Product)
+                        .ToList();
             }
 
         }
+
+
 
         // GET admin/2
         [HttpGet("{id}")]

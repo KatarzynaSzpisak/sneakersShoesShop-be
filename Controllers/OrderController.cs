@@ -21,42 +21,81 @@ namespace onlineTShirtShop.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public IEnumerable<Order> Get()
-        {
-            using (OrderContext context = new OrderContext())
-            {
-                return context.Orders
-                        .Include(o => o.OrderDetails)
-                            .ThenInclude(od => od.Size)
+        // [HttpGet]
+        // public IEnumerable<Order> Get()
+        // {
+        //     using (OrderContext context = new OrderContext())
+        //     {
+        //         return context.Orders
+        //                 .Include(o => o.OrderDetails)
+        //                     .ThenInclude(od => od.Size)
 
-                        .Include(o => o.OrderDetails)
-                            .ThenInclude(od => od.Color)
+        //                 .Include(o => o.OrderDetails)
+        //                     .ThenInclude(od => od.Color)
 
-                        .Include(o => o.OrderDetails)
-                            .ThenInclude(od => od.Material)
-                            
-                        .ToArray();
-            }
-        }
+        //                 .Include(o => o.OrderDetails)
+        //                     .ThenInclude(od => od.Material)
+
+        //                 .ToArray();
+        //     }
+        // }
 
         // GET order/2
-        [HttpGet("{id}")]
-        public ActionResult<Order> Get(int id)
+        // [HttpGet("{id}")]
+        // public ActionResult<Order> Get(int id)
+        // {
+        //     using (OrderContext context = new OrderContext())
+        //     {
+        //         return Ok(context.Orders
+        //                 .Include(o => o.OrderDetails)
+        //                     .ThenInclude(od => od.Size)
+
+        //                 .Include(o => o.OrderDetails)
+        //                     .ThenInclude(od => od.Color)
+
+        //                 .Include(o => o.OrderDetails)
+        //                     .ThenInclude(od => od.Material)
+
+        //                 .First(o => o.Id == id));
+        //     }
+        // }
+
+        // POST new Order
+        [HttpPost]
+        public ActionResult Order()
         {
+            const int Customer = 1;
+
             using (OrderContext context = new OrderContext())
             {
-                return Ok(context.Orders
-                        .Include(o => o.OrderDetails)
-                            .ThenInclude(od => od.Size)
+                var res = context.OrderRows
+                .Where(or => or.CustomerId == Customer && or.OrderId == 1)
+                .ToList();
 
-                        .Include(o => o.OrderDetails)
-                            .ThenInclude(od => od.Color)
+                // check cart is not empty
+                if (res.Count == 0)
+                {
+                    return Ok();
+                }
 
-                        .Include(o => o.OrderDetails)
-                            .ThenInclude(od => od.Material)
-                            
-                        .First(o => o.Id == id));
+                var newOrder = new Order()
+                {
+                    Status = "New",
+                    CustomerId = Customer,
+                    Created = DateTime.Now,
+                };
+                context.Orders.Add(newOrder);
+                context.SaveChanges();
+
+
+                foreach (var or in res)
+                {
+                    or.OrderId = newOrder.Id;
+                }
+                context.SaveChanges();
+
+                return Created("", newOrder);
+
             }
         }
     }

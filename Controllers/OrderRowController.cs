@@ -29,6 +29,7 @@ namespace onlineTShirtShop.Controllers
             using (OrderContext context = new OrderContext())
             {
                 return context.OrderRows
+                .Where(or => or.OrderId == 1)
                 .Include(or => or.Product)
                 .Include(or => or.Size)
                 .Include(or => or.Color)
