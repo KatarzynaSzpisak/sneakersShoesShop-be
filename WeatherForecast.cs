@@ -1,6 +1,6 @@
 using System;
 
-namespace onlineTShirtShop
+namespace sneakersShoesShop
 {
     public class WeatherForecast
     {

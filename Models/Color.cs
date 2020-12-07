@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 
-namespace onlineTShirtShop.Models
+namespace sneakersShoesShop.Models
 {
 
     public class Color

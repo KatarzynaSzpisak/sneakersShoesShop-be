@@ -1,8 +1,8 @@
 using System;
-using onlineTShirtShop.Models;
+using sneakersShoesShop.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace onlineTShirtShop.OrderContexts
+namespace sneakersShoesShop.OrderContexts
 {
     public class OrderContext : DbContext
     {
@@ -15,7 +15,7 @@ namespace onlineTShirtShop.OrderContexts
 
         public DbSet<Color> Colors { get; set; } // Table Colors
         public DbSet<Size> Sizes { get; set; } // Table Sizes
-        public DbSet<Material> Materials { get; set; } // Table Materials
+        public DbSet<Material> Type { get; set; } // Table Type
         public object Product { get; internal set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
@@ -27,27 +27,27 @@ namespace onlineTShirtShop.OrderContexts
             modelBuilder.Entity<Customer>().HasData(new Customer
             {
                 Id = 1,
-                FirstName = "Tanya",
-                LastName = "L",
-                Email = "tanya.l@l.se",
+                FirstName = "Katarzyna",
+                LastName = "Sz",
+                Email = "kitty1@gmail.com",
                 Telephone = 123456789,
                 Registered = DateTime.Now.AddDays(-50)
             });
             modelBuilder.Entity<Customer>().HasData(new Customer
             {
                 Id = 2,
-                FirstName = "Dima",
-                LastName = "L",
-                Email = "dima.l@l.se",
+                FirstName = "Anna",
+                LastName = "Sz",
+                Email = "anna@gmail.com",
                 Telephone = 123456789,
                 Registered = DateTime.Now.AddDays(-10)
             });
             modelBuilder.Entity<Customer>().HasData(new Customer
             {
                 Id = 3,
-                FirstName = "Kolya",
-                LastName = "L",
-                Email = "kolya.l@l.com",
+                FirstName = "Piotr",
+                LastName = "Sz",
+                Email = "piotr90@gmail.com",
                 Telephone = 123456789,
                 Registered = DateTime.Now.AddDays(-5)
             });
@@ -87,44 +87,83 @@ namespace onlineTShirtShop.OrderContexts
             modelBuilder.Entity<Product>().HasData(new Product
             {
                 Id = 1,
-                Name = "Cats TShirt",
-                Price = 100,
-                ActualCost = 100,
-                ImageUrl = "/assets/images/test1.jpg",
-                Details = "Unik cats tshirt, hand made design",
-                ColorId = 1,
+                Name = "Design shoes monster",
+                Price = 200,
+                ActualCost = 200,
+                ImageUrl = "/assets/images/shoesMonster.jpg",
+                Details = "Hand painted shoes with nice monster",
+                ColorId = 2,
                 SizeId = 1,
                 MaterialId = 1,
             });
             modelBuilder.Entity<Product>().HasData(new Product
             {
                 Id = 2,
-                Name = "Classic TShirt",
-                Price = 90,
-                ActualCost = 90,
-                ImageUrl = "/assets/images/test2.jpg",
-                Details = "Unik classic tshirt, hand made design",
-                ColorId = 2,
+                Name = "Design shoes Pac-Man",
+                Price = 190,
+                ActualCost = 190,
+                ImageUrl = "/assets/images/shoesPac.jpg",
+                Details = "Sentimentaly game, hand painted shoes",
+                ColorId = 1,
                 SizeId = 2,
-                MaterialId = 2
+                MaterialId = 1
             });
             modelBuilder.Entity<Product>().HasData(new Product
             {
                 Id = 3,
-                Name = "Unisex TShirt",
-                Price = 80,
-                ActualCost = 80,
-                ImageUrl = "/assets/images/test3.jpg",
-                Details = "Unik unisex tshirt, hand made design",
-                ColorId = 3,
+                Name = "Design shoes Cat",
+                Price = 380,
+                ActualCost = 380,
+                ImageUrl = "/assets/images/shoesCat.jpg",
+                Details = "Hand painted shoes, perfect for cats lovers",
+                ColorId = 4,
                 SizeId = 3,
                 MaterialId = 1
             });
+            modelBuilder.Entity<Product>().HasData(new Product
+            {
+                Id = 4,
+                Name = "Lether shoes",
+                Price = 200,
+                ActualCost = 200,
+                ImageUrl = "/assets/images/shoesLetherW.jpg",
+                Details = "Unisex shoes",
+                ColorId = 4,
+                SizeId = 4,
+                MaterialId = 2
+            });
+            modelBuilder.Entity<Product>().HasData(new Product
+            {
+                Id = 5,
+                Name = "Dark leather shoes",
+                Price = 280,
+                ActualCost = 280,
+                ImageUrl = "/assets/images/shoesLetherG.jpg",
+                Details = "Lether shoes in dark green color, perfect for rainy day",
+                ColorId = 2,
+                SizeId = 3,
+                MaterialId = 2
+            });
+            modelBuilder.Entity<Product>().HasData(new Product
+            {
+                Id = 6,
+                Name = "Pinky pink leather shoes",
+                Price = 480,
+                ActualCost = 480,
+                ImageUrl = "/assets/images/shoesLetherP.jpg",
+                Details = "Sweat pink shoes for every woman",
+                ColorId = 3,
+                SizeId = 3,
+                MaterialId = 2
+            });
+
+
+
             //color
             modelBuilder.Entity<Color>().HasData(new Color
             {
                 Id = 1,
-                ColorName = "red"
+                ColorName = "black"
             });
             modelBuilder.Entity<Color>().HasData(new Color
             {
@@ -134,49 +173,50 @@ namespace onlineTShirtShop.OrderContexts
             modelBuilder.Entity<Color>().HasData(new Color
             {
                 Id = 3,
-                ColorName = "blue"
+                ColorName = "pink"
             });
             modelBuilder.Entity<Color>().HasData(new Color
             {
                 Id = 4,
-                ColorName = "black"
+                ColorName = "white"
             });
             //size 
             modelBuilder.Entity<Size>().HasData(new Size
             {
                 Id = 1,
-                SizeName = "XS"
+                SizeName = "35"
             });
             modelBuilder.Entity<Size>().HasData(new Size
             {
                 Id = 2,
-                SizeName = "S"
+                SizeName = "36"
             });
             modelBuilder.Entity<Size>().HasData(new Size
             {
                 Id = 3,
-                SizeName = "M"
+                SizeName = "37"
             });
             modelBuilder.Entity<Size>().HasData(new Size
             {
                 Id = 4,
-                SizeName = "L"
+                SizeName = "38"
             });
             modelBuilder.Entity<Size>().HasData(new Size
             {
                 Id = 5,
-                SizeName = "XL"
+                SizeName = "40"
             });
             modelBuilder.Entity<Size>().HasData(new Size
             {
                 Id = 6,
-                SizeName = "XXL"
+                SizeName = "42"
             });
+
             //material
             modelBuilder.Entity<Material>().HasData(new Material
             {
                 Id = 1,
-                MaterialName = "cotton"
+                MaterialName = "cotton and syntetic"
             });
             modelBuilder.Entity<Material>().HasData(new Material
             {

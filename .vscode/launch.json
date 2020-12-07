@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/netcoreapp3.0/onlineTShirtShop.dll",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp3.0/sneakersShoesShop.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,

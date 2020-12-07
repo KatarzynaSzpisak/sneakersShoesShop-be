@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using onlineTShirtShop.Models;
-using onlineTShirtShop.OrderContexts;
+using sneakersShoesShop.Models;
+using sneakersShoesShop.OrderContexts;
 
-namespace onlineTShirtShop.Controllers
+namespace sneakersShoesShop.Controllers
 {
     [Route("[controller]")]
     [ApiController]

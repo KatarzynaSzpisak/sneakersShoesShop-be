@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "onlineTShirtShop": {
+    "sneakersShoesShop": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "weatherforecast",

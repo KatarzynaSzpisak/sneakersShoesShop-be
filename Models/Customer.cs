@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace onlineTShirtShop.Models {
+namespace sneakersShoesShop.Models {
 
     public class Customer {
         public int Id {get;set;}
