@@ -102,7 +102,7 @@ namespace sneakersShoesShop.OrderContexts
                 Name = "Design shoes Pac-Man",
                 Price = 190,
                 ActualCost = 190,
-                ImageUrl = "/assets/images/shoesPang.jpg",
+                ImageUrl = "/assets/images/shoesPac.jpg",
                 Details = "Sentimentaly game, hand painted shoes",
                 ColorId = 1,
                 SizeId = 2,
