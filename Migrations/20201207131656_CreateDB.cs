@@ -297,7 +297,7 @@ namespace onlineShop.Migrations
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "Created", "CustomerId", "Status" },
-                values: new object[] { 1, new DateTime(2020, 12, 7, 14, 16, 55, 735, DateTimeKind.Local).AddTicks(5576), 1, "BASKET" });
+                values: new object[] { 1, new DateTime(2020, 12, 7, 14, 16, 55, 735, DateTimeKind.Local).AddTicks(5576), 1, "basket" });
 
             migrationBuilder.InsertData(
                 table: "Orders",
