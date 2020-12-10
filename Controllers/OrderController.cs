@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using sneakersShoesShop.OrderContexts;
-using sneakersShoesShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using SneakersShoesShop.Models;
+using SneakersShoesShop.OrderContexts;
 
-namespace sneakersShoesShop.Controllers
+namespace SneakersShoesShop.Controllers
 {
     [ApiController]
     [Route("[controller]")]

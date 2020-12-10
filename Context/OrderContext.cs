@@ -1,12 +1,11 @@
 using System;
-using sneakersShoesShop.Models;
 using Microsoft.EntityFrameworkCore;
+using SneakersShoesShop.Models;
 
-namespace sneakersShoesShop.OrderContexts
+namespace SneakersShoesShop.OrderContexts
 {
     public class OrderContext : DbContext
     {
-
         public DbSet<Customer> Customers { get; set; } // Tabel Customers
         public DbSet<Product> Products { get; set; } // Tabel Products
         public DbSet<Order> Orders { get; set; } //Table Orders
@@ -19,7 +18,7 @@ namespace sneakersShoesShop.OrderContexts
         public object Product { get; internal set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-         => options.UseSqlite("Data Source=onlineshop.db");
+            => options.UseSqlite("Data Source=sneakers-shoes-shop.db");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -54,7 +53,7 @@ namespace sneakersShoesShop.OrderContexts
             //order basket
             modelBuilder.Entity<Order>()
                 .Property(o => o.Id)
-                .ValueGeneratedOnAdd();  
+                .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Order>().HasData(new Order
             {
@@ -69,7 +68,6 @@ namespace sneakersShoesShop.OrderContexts
                 CustomerId = 2,
                 Status = "onpaid",
                 Created = DateTime.Now.AddHours(-3),
-
             });
             modelBuilder.Entity<Order>().HasData(new Order
             {
@@ -156,7 +154,6 @@ namespace sneakersShoesShop.OrderContexts
                 SizeId = 3,
                 MaterialId = 2
             });
-
 
 
             //color

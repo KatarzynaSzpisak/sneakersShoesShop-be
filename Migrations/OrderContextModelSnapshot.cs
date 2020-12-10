@@ -3,9 +3,9 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using sneakersShoesShop.OrderContexts;
+using SneakersShoesShop.OrderContexts;
 
-namespace onlineShop.Migrations
+namespace SneakersShoesShop.Migrations
 {
     [DbContext(typeof(OrderContext))]
     partial class OrderContextModelSnapshot : ModelSnapshot

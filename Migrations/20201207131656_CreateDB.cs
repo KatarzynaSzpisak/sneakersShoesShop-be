@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace onlineShop.Migrations
+namespace SneakersShoesShop.Migrations
 {
     public partial class CreateDB : Migration
     {

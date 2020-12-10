@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using sneakersShoesShop.OrderContexts;
-using sneakersShoesShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using SneakersShoesShop.Models;
+using SneakersShoesShop.OrderContexts;
 
-namespace sneakersShoesShop.Controllers
+namespace SneakersShoesShop.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -26,7 +26,11 @@ namespace sneakersShoesShop.Controllers
         {
             using (OrderContext context = new OrderContext())
             {
-                return context.Products.ToList();
+                return context.Products
+                    .Include(p => p.Size)
+                    .Include(p => p.Color)
+                    .Include(p => p.Material)
+                    .ToList();
             }
         }
 
@@ -35,14 +39,12 @@ namespace sneakersShoesShop.Controllers
         [HttpGet("{id}")]
         public ActionResult<Product> Get(int id)
         {
-            using (OrderContext context = new OrderContext())
-            {
-                return Ok(context.Products
-                        .Include(p => p.Size)
-                        .Include(p => p.Color)
-                        .Include(p => p.Material)
-                        .First(everyProduct => everyProduct.Id == id));
-            }
+            using OrderContext context = new OrderContext();
+            return Ok(context.Products
+                .Include(p => p.Size)
+                .Include(p => p.Color)
+                .Include(p => p.Material)
+                .First(everyProduct => everyProduct.Id == id));
         }
     }
 }

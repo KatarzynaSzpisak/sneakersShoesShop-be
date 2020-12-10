@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using sneakersShoesShop.OrderContexts;
+using SneakersShoesShop.OrderContexts;
 
-namespace onlineShop.Migrations
+namespace SneakersShoesShop.Migrations
 {
     [DbContext(typeof(OrderContext))]
     [Migration("20201207131656_CreateDB")]
